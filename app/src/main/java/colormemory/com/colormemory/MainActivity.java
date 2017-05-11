@@ -11,6 +11,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TableLayout tableLayout = (TableLayout) findViewById(R.id.tl);
-        //tableLayout.getRotationX()
+        ////
+        // tableLayout.getRotationX()
+    //
     }
 }
