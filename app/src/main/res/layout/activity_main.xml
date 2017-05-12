@@ -7,106 +7,110 @@
     tools:context="colormemory.com.colormemory.MainActivity">
 
 
-    <TableLayout
-        android:id="@+id/tl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+    <!--<TableLayout-->
+        <!--android:id="@+id/tl"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerInParent="true">-->
 
-        <TableRow
+        <!--<TableRow-->
 
-            >
+            <!--&gt;-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
-        </TableRow>
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
+        <!--</TableRow>-->
 
-        <TableRow>
+        <!--<TableRow>-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
-        </TableRow>
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
+        <!--</TableRow>-->
 
-        <TableRow>
+        <!--<TableRow>-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
-        </TableRow>
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
+        <!--</TableRow>-->
 
-        <TableRow>
+        <!--<TableRow>-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
 
-            <TextView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="sample1" />
-        </TableRow>
+            <!--<TextView-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:text="sample1" />-->
+        <!--</TableRow>-->
 
-    </TableLayout>
+    <!--</TableLayout>-->
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
 
 </RelativeLayout>
