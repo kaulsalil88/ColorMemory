@@ -1,10 +1,6 @@
 package colormemory.com.colormemory;
 
-import android.app.Activity;
-import android.databinding.DataBindingComponent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.media.Image;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TableLayout;
 import android.widget.Toast;
 
-import java.util.StringTokenizer;
-
 import colormemory.com.colormemory.databinding.ActivityMainBinding;
+import model.CardModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(final View view) {
         final CardModel cardModel = ((CardModel) view.getTag());
-        if (!cardModel.isRevealed) {
-            ((ImageView) view).setBackground(cardModel.drawable);
+        if (!cardModel.isRevealed()) {
+            ((ImageView) view).setBackground(cardModel.getDrawable());
             if (mPreviousSelectedCard == null) {
                 mPreviousSelectedCard = ((ImageView) view);
                 return;
@@ -69,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
                 mCurrentlySelectedCard = ((ImageView) view);
                 final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
                 final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
-                if (cardModel1.id == cardModel2.id) {
+                if (cardModel1.getId() == cardModel2.getId()) {
                     mIsMatched = true;
                     mSelectedPairs++;
-                    cardModel.isRevealed = true;
-                    cardModel2.isRevealed = true;
+                    cardModel1.setRevealed(true);
+                    cardModel2.setRevealed(true);
                     mCurrentScore = mCurrentScore + 2;
                     if (mSelectedPairs == 8) {
                         Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();

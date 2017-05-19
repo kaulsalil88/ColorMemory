@@ -1,4 +1,4 @@
-package colormemory.com.colormemory;
+package model;
 
 import android.graphics.drawable.Drawable;
 
@@ -7,6 +7,9 @@ import android.graphics.drawable.Drawable;
  */
 
 public class CardModel {
+    public void setRevealed(boolean revealed) {
+        isRevealed = revealed;
+    }
 
     //The id of the card .
     int id;
@@ -20,5 +23,17 @@ public class CardModel {
     public CardModel(int id, Drawable drawable) {
         this.id = id;
         this.drawable = drawable;
+    }
+
+    public boolean isRevealed() {
+        return isRevealed;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Drawable getDrawable() {
+        return drawable;
     }
 }
