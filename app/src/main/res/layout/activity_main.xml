@@ -52,7 +52,8 @@
                     android:id="@+id/iv_03"
                     android:layout_width="@dimen/cardsize"
                     android:layout_height="@dimen/cardsize"
-                    android:background="@drawable/card_bg" />
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
             </TableRow>
 
             <TableRow>
@@ -68,19 +69,22 @@
                     android:id="@+id/iv_11"
                     android:layout_width="@dimen/cardsize"
                     android:layout_height="@dimen/cardsize"
-                    android:background="@drawable/card_bg" />
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
                     android:id="@+id/iv_12"
                     android:layout_width="@dimen/cardsize"
                     android:layout_height="@dimen/cardsize"
-                    android:background="@drawable/card_bg" />
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
                     android:id="@+id/iv_13"
                     android:layout_width="@dimen/cardsize"
                     android:layout_height="@dimen/cardsize"
-                    android:background="@drawable/card_bg" />
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
             </TableRow>
 
             <TableRow>
@@ -89,52 +93,60 @@
                     android:id="@+id/iv_20"
                     android:layout_width="@dimen/cardsize"
                     android:layout_height="@dimen/cardsize"
-                    android:background="@drawable/card_bg" />
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
-                    android:background="@drawable/card_bg"
                     android:id="@+id/iv_21"
                     android:layout_width="@dimen/cardsize"
-                    android:layout_height="@dimen/cardsize" />
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
-                    android:background="@drawable/card_bg"
                     android:id="@+id/iv_22"
                     android:layout_width="@dimen/cardsize"
-                    android:layout_height="@dimen/cardsize" />
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
-                    android:background="@drawable/card_bg"
                     android:id="@+id/iv_23"
                     android:layout_width="@dimen/cardsize"
-                    android:layout_height="@dimen/cardsize" />
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
             </TableRow>
 
             <TableRow>
 
                 <ImageView
-                    android:background="@drawable/card_bg"
                     android:id="@+id/iv_30"
                     android:layout_width="@dimen/cardsize"
-                    android:layout_height="@dimen/cardsize" />
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
-                    android:background="@drawable/card_bg"
                     android:id="@+id/iv_31"
                     android:layout_width="@dimen/cardsize"
-                    android:layout_height="@dimen/cardsize" />
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
-                    android:background="@drawable/card_bg"
                     android:id="@+id/iv_32"
                     android:layout_width="@dimen/cardsize"
-                    android:layout_height="@dimen/cardsize" />
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
 
                 <ImageView
-                    android:background="@drawable/card_bg"
                     android:id="@+id/iv_33"
                     android:layout_width="@dimen/cardsize"
-                    android:layout_height="@dimen/cardsize" />
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/card_bg"
+                    android:onClick="@{(v)->handler.onClick(v)}" />
             </TableRow>
 
         </TableLayout>
