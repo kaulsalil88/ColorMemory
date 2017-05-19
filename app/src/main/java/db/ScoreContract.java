@@ -19,14 +19,7 @@ public final class ScoreContract {
     }
 
 
-    private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + Score.TABLE_NAME + " (" +
-                    Score._ID + " INTEGER PRIMARY KEY," +
-                    Score.COLUMN_NAME_SCORE + " INTEGER," +
-                    Score.COLUMN_NAME_NAME + " TEXT)";
 
-    private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + Score.TABLE_NAME;
 
 
 }

@@ -6,4 +6,7 @@
     <string name="alreadymatched">Already Matched</string>
     <string name="highscore">High Score</string>
     <string name="congratsnewhighscore">Congratulations.</string>
+    <string name="enterdetails">Enter Details</string>
+    <string name="entername">enter name</string>
+    <string name="save">save</string>
 </resources>
