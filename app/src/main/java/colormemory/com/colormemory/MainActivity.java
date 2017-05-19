@@ -38,36 +38,14 @@ public class MainActivity extends AppCompatActivity {
             for (int j = 0; j < 2; j++) {
 
                 Log.e(TAG, "i is " + i + "and j is " + j + " and the mColorNumber is " + mColorNumber);
-                int drawableIdentifier = getResources().getIdentifier("colour" + mColorNumber, "drawable", getPackageName());
-                int imageViewIdentifier = getResources().getIdentifier("iv_" + i + "" + j, "id", getPackageName());
-                CardModel cardModel = new CardModel(mColorNumber,
-                        ContextCompat.getDrawable(this, drawableIdentifier));
-                findViewById(imageViewIdentifier).setTag(cardModel);
+                setImageViewData(i, j);
                 //Setting the card at 2units away on the x axis
                 int tempy = j + 2;
-                Log.e(TAG, "i is " + i + "and tempy is " + tempy + " and the mColorNumber is " + mColorNumber);
-                int drawableIdentifiertempy = getResources().getIdentifier("colour" + mColorNumber, "drawable", getPackageName());
-                int imageViewIdentifiertempy = getResources().getIdentifier("iv_" + i + "" + tempy, "id", getPackageName());
-                CardModel cardModeltempy = new CardModel(mColorNumber,
-                        ContextCompat.getDrawable(this, drawableIdentifier));
-                findViewById(imageViewIdentifiertempy).setTag(cardModel);
+                setImageViewData(i, tempy);
                 //Incrementing the color number
                 mColorNumber++;
 
 
-//                if (mColorCount < 2) {
-//                    int drawableIdentifier = getResources().getIdentifier("colour" + mColorNumber, "drawable", getPackageName());
-//                    Log.d(TAG, "drawableIdentifier" + drawableIdentifier);
-//                    CardModel cardModel = new CardModel(mColorNumber,
-//                            ContextCompat.getDrawable(this, drawableIdentifier));
-//                    int imageViewIdentifier = getResources().getIdentifier("iv_" + i + "" + j, "id", getPackageName());
-//                    Log.d(TAG, "imageViewIdentifier " + imageViewIdentifier);
-//                    findViewById(imageViewIdentifier).setTag(cardModel);
-//                    mColorCount++;
-//                } else {
-//                    mColorNumber++;
-//                    mColorCount = 0;
-//                }
             }
 
 
@@ -93,10 +71,11 @@ public class MainActivity extends AppCompatActivity {
                         if (cardModel1.id == cardModel2.id) {
                             cardModel.isRevealed = true;
                             cardModel2.isRevealed = true;
+                            mCurrentScore += 2;
                         } else {
                             mPreviousSelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
                             mCurrentlySelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
-
+                            mCurrentScore += -1;
                         }
                         mCurrentlySelectedCard = mPreviousSelectedCard = null;
                     }
@@ -112,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void setImageViewData(int x, int y) {
+        int drawableIdentifier = getResources().getIdentifier("colour" + mColorNumber, "drawable", getPackageName());
+        int imageViewIdentifier = getResources().getIdentifier("iv_" + x + "" + y, "id", getPackageName());
+        CardModel cardModel = new CardModel(mColorNumber,
+                ContextCompat.getDrawable(this, drawableIdentifier));
+        findViewById(imageViewIdentifier).setTag(cardModel);
+    }
 
 
 }
