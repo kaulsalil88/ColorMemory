@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     mCurrentScore = mCurrentScore + 2;
                     if (mSelectedPairs == 8) {
                         Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
+                        reset();
                     }
                 } else {
                     mIsMatched = false;
@@ -119,4 +120,18 @@ public class MainActivity extends AppCompatActivity {
     private void launchHighScoreScreen() {
 
     }
+
+
+    private void reset() {
+        mCurrentScore = 0;
+        mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                int imageViewIdentifier = getResources().getIdentifier("iv_" + i + "" + j, "id", getPackageName());
+                ((ImageView) findViewById(imageViewIdentifier)).setBackground(ContextCompat.getDrawable(this, R.drawable.card_bg));
+
+            }
+        }
+    }
+
 }
