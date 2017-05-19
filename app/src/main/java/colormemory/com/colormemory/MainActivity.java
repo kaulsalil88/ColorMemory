@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import java.util.StringTokenizer;
+
 import colormemory.com.colormemory.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mPreviousSelectedCard, mCurrentlySelectedCard;
 
     private Handler mHandler;
+    private boolean mIsMatched = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +68,24 @@ public class MainActivity extends AppCompatActivity {
                 mCurrentlySelectedCard = ((ImageView) view);
                 final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
                 final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
+                if (cardModel1.id == cardModel2.id) {
+                    mIsMatched = true;
+                    cardModel.isRevealed = true;
+                    cardModel2.isRevealed = true;
+                    mCurrentScore = mCurrentScore + 2;
+                } else {
+                    mIsMatched = false;
+                    mCurrentScore = mCurrentScore - 1;
+                }
+                mCurrentlySelectedCard = mPreviousSelectedCard = null;
                 mHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (cardModel1.id == cardModel2.id) {
-                            cardModel.isRevealed = true;
-                            cardModel2.isRevealed = true;
-                            mCurrentScore += 2;
-                        } else {
+                        if (!mIsMatched) {
                             mPreviousSelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
                             mCurrentlySelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
-                            mCurrentScore += -1;
                         }
-                        mCurrentlySelectedCard = mPreviousSelectedCard = null;
+
                     }
                 }, 1000);
 
@@ -87,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(view.getContext(), getString(R.string.alreadymatched), Toast.LENGTH_SHORT).show();
         }
 
+        mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
 
     }
 
