@@ -1,116 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="colormemory.com.colormemory.MainActivity">
+<layout>
 
+    <data>
 
-    <!--<TableLayout-->
-        <!--android:id="@+id/tl"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerInParent="true">-->
+        <variable
+            name="handler"
+            type="colormemory.com.colormemory.MainActivity"></variable>
+    </data>
 
-        <!--<TableRow-->
-
-            <!--&gt;-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-        <!--</TableRow>-->
-
-        <!--<TableRow>-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-        <!--</TableRow>-->
-
-        <!--<TableRow>-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-        <!--</TableRow>-->
-
-        <!--<TableRow>-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-
-            <!--<TextView-->
-                <!--android:layout_width="50dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:text="sample1" />-->
-        <!--</TableRow>-->
-
-    <!--</TableLayout>-->
-    <FrameLayout
-        android:id="@+id/frame"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></FrameLayout>
+        android:layout_height="match_parent"
+        tools:context="colormemory.com.colormemory.MainActivity">
 
-</RelativeLayout>
+
+        <TableLayout
+            android:id="@+id/tl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <TableRow
+
+                >
+
+                <ImageView
+                    android:id="@+id/iv_00"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize"
+                    android:background="@drawable/colour1" />
+
+                <ImageView
+                    android:id="@+id/iv_01"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_02"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_03"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+            </TableRow>
+
+            <TableRow>
+
+                <ImageView
+                    android:id="@+id/iv_10"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_11"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_12"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_13"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+            </TableRow>
+
+            <TableRow>
+
+                <ImageView
+                    android:id="@+id/iv_20"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_21"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_22"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_23"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+            </TableRow>
+
+            <TableRow>
+
+                <ImageView
+                    android:id="@+id/iv_30"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_31"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_32"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+
+                <ImageView
+                    android:id="@+id/iv_33"
+                    android:layout_width="@dimen/cardsize"
+                    android:layout_height="@dimen/cardsize" />
+            </TableRow>
+
+        </TableLayout>
+
+
+    </RelativeLayout>
+</layout>
