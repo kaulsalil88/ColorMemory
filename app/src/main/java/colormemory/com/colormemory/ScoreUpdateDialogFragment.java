@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import colormemory.com.colormemory.databinding.FragmentScoreUpdateBinding;
 import db.ScoreContract;
 import db.ScoreDBHelper;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by salil-kaul on 20/5/17.
@@ -22,6 +25,15 @@ public class ScoreUpdateDialogFragment extends DialogFragment {
 
 
     FragmentScoreUpdateBinding mBinding;
+
+    public ScoreUpdateDialogFragment() {
+    }
+
+
+    public static ScoreUpdateDialogFragment newInstance() {
+        ScoreUpdateDialogFragment scoreUpdateDialogFragment = new ScoreUpdateDialogFragment();
+        return scoreUpdateDialogFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -56,6 +68,7 @@ public class ScoreUpdateDialogFragment extends DialogFragment {
         values.put(ScoreContract.Score.COLUMN_NAME_SCORE, mBinding.tvScore.getText().toString());
 // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ScoreContract.Score.TABLE_NAME, null, values);
-
+        Log.d(TAG, "insertData() called" + newRowId);
+        dismiss();
     }
 }

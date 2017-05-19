@@ -44,6 +44,7 @@
                     android:background="@drawable/logo" />
 
                 <TextView
+                    android:id="@+id/tv_highscore"
                     android:text="@string/highscore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -49,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        mBinding.tvHighscore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScoreUpdateDialogFragment.newInstance().show(getSupportFragmentManager(), "");
+            }
+        });
+
     }
 
 
