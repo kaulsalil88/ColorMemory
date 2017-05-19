@@ -62,4 +62,17 @@ public class FragmentB extends Fragment {
         return inflater.inflate(R.layout.fragment_b, container, false);
     }
 
+
+    @Override
+    public void onDetach() {
+        Log.d(TAG, "onDetach() called");
+        super.onDetach();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy() called");
+        super.onDestroy();
+
+    }
 }

@@ -55,6 +55,7 @@ public class FragmentA extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -82,6 +83,18 @@ public class FragmentA extends Fragment {
         return inflater.inflate(R.layout.fragment_, container, false);
     }
 
+    @Override
+    public void onViewCreated(View view, Bundle bundle) {
+        super.onViewCreated(view, bundle);
+        view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().beginTransaction().
+                        add(R.id.frame, FragmentB.getInstance()).addToBackStack("FragmentB").commit();
+            }
+        });
+    }
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -102,8 +115,16 @@ public class FragmentA extends Fragment {
 
     @Override
     public void onDetach() {
+        Log.d(TAG, "onDetach() called");
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy() called");
+        super.onDestroy();
+
     }
 
     /**

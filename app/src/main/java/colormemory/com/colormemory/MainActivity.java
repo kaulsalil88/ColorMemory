@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
         //TableLayout tableLayout = (TableLayout) findViewById(R.id.tl);
         ////
         // tableLayout.getRotationX()//
-    //
+        //
+
+        getSupportFragmentManager().beginTransaction().
+                add(R.id.frame, FragmentA.newInstance("", "")).addToBackStack("fragA").commit();
     }
 }
