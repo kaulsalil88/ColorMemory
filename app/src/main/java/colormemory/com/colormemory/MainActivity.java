@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Handler mHandler;
     private boolean mIsMatched = false;
+    int mSelectedPairs = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
                 if (cardModel1.id == cardModel2.id) {
                     mIsMatched = true;
+                    mSelectedPairs++;
                     cardModel.isRevealed = true;
                     cardModel2.isRevealed = true;
                     mCurrentScore = mCurrentScore + 2;
+                    if (mSelectedPairs == 8) {
+                        Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     mIsMatched = false;
                     mCurrentScore = mCurrentScore - 1;
@@ -117,4 +122,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void launchHighScoreScreen() {
+
+    }
 }
