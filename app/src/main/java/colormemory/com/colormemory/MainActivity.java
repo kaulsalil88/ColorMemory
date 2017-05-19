@@ -77,17 +77,25 @@ public class MainActivity extends AppCompatActivity {
                     mIsMatched = false;
                     mCurrentScore = mCurrentScore - 1;
                 }
-                mCurrentlySelectedCard = mPreviousSelectedCard = null;
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (!mIsMatched) {
+                if (!mIsMatched) {
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
                             mPreviousSelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
                             mCurrentlySelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
+                            mCurrentlySelectedCard = mPreviousSelectedCard = null;
+                            mBinding.getRoot().setEnabled(false);
                         }
+                    }, 1000);
 
-                    }
-                }, 1000);
+                    //Disabling the parent layout for the duration till the cards arent reset this to prevent the
+                    //mPreviousSelectedCard and mCurrentlySelectedCard from getting reset .
+                    mBinding.getRoot().setEnabled(false);
+
+                } else {
+                    mCurrentlySelectedCard = mPreviousSelectedCard = null;
+                }
+
 
             }
 
