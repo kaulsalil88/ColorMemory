@@ -60,26 +60,29 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClick(final View view) {
         final CardModel cardModel = ((CardModel) view.getTag());
-        ((ImageView) view).setBackground(cardModel.drawable);
-        if (mPreviousSelectedCard == null) {
-            mPreviousSelectedCard = ((ImageView) view);
-        } else {
-            mCurrentlySelectedCard = ((ImageView) view);
-            final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
-            final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (cardModel1.id == cardModel2.id) {
-                        cardModel.isRevealed = true;
-                        cardModel2.isRevealed = true;
-                    } else {
-                        mPreviousSelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
-                        mCurrentlySelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
-                        mCurrentlySelectedCard = mCurrentlySelectedCard = null;
+        if (!cardModel.isRevealed) {
+            ((ImageView) view).setBackground(cardModel.drawable);
+            if (mPreviousSelectedCard == null) {
+                mPreviousSelectedCard = ((ImageView) view);
+            } else {
+                mCurrentlySelectedCard = ((ImageView) view);
+                final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
+                final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
+                mHandler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (cardModel1.id == cardModel2.id) {
+                            cardModel.isRevealed = true;
+                            cardModel2.isRevealed = true;
+                        } else {
+                            mPreviousSelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
+                            mCurrentlySelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
+                            mCurrentlySelectedCard = mCurrentlySelectedCard = null;
+                        }
                     }
-                }
-            }, 500);
+                }, 1000);
+
+            }
 
         }
 
