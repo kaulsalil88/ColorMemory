@@ -1,5 +1,6 @@
 package colormemory.com.colormemory;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 
 import colormemory.com.colormemory.databinding.FragmentScoreUpdateBinding;
 import db.ScoreContract;
@@ -25,14 +27,26 @@ public class ScoreUpdateDialogFragment extends DialogFragment {
 
 
     FragmentScoreUpdateBinding mBinding;
+    private int mScore;
 
     public ScoreUpdateDialogFragment() {
     }
 
 
-    public static ScoreUpdateDialogFragment newInstance() {
+    public static ScoreUpdateDialogFragment newInstance(int score) {
         ScoreUpdateDialogFragment scoreUpdateDialogFragment = new ScoreUpdateDialogFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("score", score);
+        scoreUpdateDialogFragment.setArguments(bundle);
         return scoreUpdateDialogFragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mScore = getArguments().getInt("score");
+        }
     }
 
     @Override
@@ -53,6 +67,7 @@ public class ScoreUpdateDialogFragment extends DialogFragment {
                 insertData();
             }
         });
+        mBinding.tvScore.setText(String.valueOf(mScore));
     }
 
 
@@ -70,5 +85,11 @@ public class ScoreUpdateDialogFragment extends DialogFragment {
         long newRowId = db.insert(ScoreContract.Score.TABLE_NAME, null, values);
         Log.d(TAG, "insertData() called" + newRowId);
         dismiss();
+    }
+
+    public Dialog onCreateDialog(Bundle bundle) {
+        Dialog dialog = super.onCreateDialog(bundle);
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
     }
 }

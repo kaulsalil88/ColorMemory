@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mBinding.tvHighscore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ScoreUpdateDialogFragment.newInstance().show(getSupportFragmentManager(), "");
+                ScoreUpdateDialogFragment.newInstance(mCurrentScore).show(getSupportFragmentManager(), "");
             }
         });
 
@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
                     cardModel1.setRevealed(true);
                     cardModel2.setRevealed(true);
                     mCurrentScore = mCurrentScore + 2;
+                    //All the cards have been revealed .
                     if (mSelectedPairs == 8) {
                         Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
                         reset();
