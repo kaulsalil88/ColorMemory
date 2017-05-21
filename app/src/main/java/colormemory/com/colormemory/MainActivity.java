@@ -1,5 +1,6 @@
 package colormemory.com.colormemory;
 
+import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import colormemory.com.colormemory.databinding.ActivityMainBinding;
 import model.CardModel;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private int mCurrentScore = 0;
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                     //All the cards have been revealed .
                     if (mSelectedPairs == 8) {
                         Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
-                        reset();
+                        launchHighScoreScreen();
                     }
                 } else {
                     mIsMatched = false;
@@ -126,7 +127,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void launchHighScoreScreen() {
-        ScoreUpdateDialogFragment.newInstance(mCurrentScore).show(getSupportFragmentManager(), "");
+        ScoreInsertDialogFragment scoreInsertDialogFragment = ScoreInsertDialogFragment.newInstance(mCurrentScore);
+        scoreInsertDialogFragment.getDialog().setOnDismissListener(this);
+        scoreInsertDialogFragment.show(getSupportFragmentManager(),ScoreInsertDialogFragment.TAG);
+        //.getDialog().setOnDismissListener(this).show(getSupportFragmentManager(), "");
+
     }
 
 
@@ -144,4 +149,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        reset();
+    }
 }

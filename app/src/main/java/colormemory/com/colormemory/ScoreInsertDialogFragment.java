@@ -2,6 +2,7 @@ package colormemory.com.colormemory;
 
 import android.app.Dialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -23,18 +24,19 @@ import static android.content.ContentValues.TAG;
  * Created by salil-kaul on 20/5/17.
  */
 
-public class ScoreUpdateDialogFragment extends DialogFragment {
+public class ScoreInsertDialogFragment extends DialogFragment {
 
 
+    public static final String TAG = ScoreInsertDialogFragment.class.getSimpleName();
     FragmentScoreUpdateBinding mBinding;
     private int mScore;
 
-    public ScoreUpdateDialogFragment() {
+    public ScoreInsertDialogFragment() {
     }
 
 
-    public static ScoreUpdateDialogFragment newInstance(int score) {
-        ScoreUpdateDialogFragment scoreUpdateDialogFragment = new ScoreUpdateDialogFragment();
+    public static ScoreInsertDialogFragment newInstance(int score) {
+        ScoreInsertDialogFragment scoreUpdateDialogFragment = new ScoreInsertDialogFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("score", score);
         scoreUpdateDialogFragment.setArguments(bundle);
