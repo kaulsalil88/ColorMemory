@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mBinding.tvHighscore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ScoreUpdateDialogFragment.newInstance(mCurrentScore).show(getSupportFragmentManager(), "");
+
             }
         });
 
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void launchHighScoreScreen() {
-
+        ScoreUpdateDialogFragment.newInstance(mCurrentScore).show(getSupportFragmentManager(), "");
     }
 
 
@@ -136,8 +136,10 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int imageViewIdentifier = getResources().getIdentifier("iv_" + i + "" + j, "id", getPackageName());
-                ((ImageView) findViewById(imageViewIdentifier)).setBackground(ContextCompat.getDrawable(this, R.drawable.card_bg));
-
+                ImageView imageView = ((ImageView) findViewById(imageViewIdentifier));
+                imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.card_bg));
+                CardModel cardModel = ((CardModel) imageView.getTag());
+                cardModel.setRevealed(false);
             }
         }
     }
