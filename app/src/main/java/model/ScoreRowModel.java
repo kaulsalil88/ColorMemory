@@ -7,8 +7,8 @@ package model;
 
 public class ScoreRowModel {
 
-    public int getIndex() {
-        return index;
+    public int getIndexOne() {
+        return indexOne;
     }
 
     public int getScore() {
@@ -19,14 +19,14 @@ public class ScoreRowModel {
         return name;
     }
 
-    public ScoreRowModel(int index, int score, String name) {
-        this.index = index;
+    public ScoreRowModel(int indexOne, int score, String name) {
+        this.indexOne = indexOne;
         this.score = score;
         this.name = name;
 
     }
 
-    private int index;
+    private int indexOne;
     private int score;
 
     private String name;

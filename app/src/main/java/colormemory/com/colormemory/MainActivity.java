@@ -1,6 +1,7 @@
 package colormemory.com.colormemory;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
@@ -57,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         mBinding.tvHighscore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent launchHighScoreActivity = new Intent(v.getContext(), HighScoresActivity.class);
+                startActivity(launchHighScoreActivity);
             }
         });
 
@@ -85,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                     if (mSelectedPairs == 8) {
                         Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
                         getCurrentHighScore();
-                        //launchSaveScoreScreen();
                     }
                 } else {
                     mIsMatched = false;
@@ -185,8 +186,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
             Log.e(TAG, "calculateCurrentHighScore: HighScore " + currentHighScore);
         }
         cursor.close();
-        if (mCurrentScore > currentHighScore) {
-            launchSaveScoreScreen();
-        }
+//        if (mCurrentScore > currentHighScore) {
+//            launchSaveScoreScreen();
+//        }
+        launchSaveScoreScreen();
     }
 }
