@@ -7,7 +7,27 @@ package model;
 
 public class ScoreRowModel {
 
-    int score;
+    public int getIndex() {
+        return index;
+    }
 
-    String name;
+    public int getScore() {
+        return score;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ScoreRowModel(int index, int score, String name) {
+        this.index = index;
+        this.score = score;
+        this.name = name;
+
+    }
+
+    private int index;
+    private int score;
+
+    private String name;
 }
