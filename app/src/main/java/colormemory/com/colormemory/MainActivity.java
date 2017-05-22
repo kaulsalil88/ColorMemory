@@ -1,6 +1,8 @@
 package colormemory.com.colormemory;
 
 import android.content.DialogInterface;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -12,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import colormemory.com.colormemory.databinding.ActivityMainBinding;
+import db.ScoreContract;
+import db.ScoreDBHelper;
 import model.CardModel;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
@@ -80,7 +84,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                     //All the cards have been revealed .
                     if (mSelectedPairs == 8) {
                         Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
-                        launchHighScoreScreen();
+                        getCurrentHighScore();
+                        //launchSaveScoreScreen();
                     }
                 } else {
                     mIsMatched = false;
@@ -126,10 +131,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     }
 
 
-    private void launchHighScoreScreen() {
+    private void launchSaveScoreScreen() {
         ScoreInsertDialogFragment scoreInsertDialogFragment = ScoreInsertDialogFragment.newInstance(mCurrentScore);
-        scoreInsertDialogFragment.getDialog().setOnDismissListener(this);
-        scoreInsertDialogFragment.show(getSupportFragmentManager(),ScoreInsertDialogFragment.TAG);
+//        scoreInsertDialogFragment.getDialog().setOnDismissListener(this);
+        scoreInsertDialogFragment.show(getSupportFragmentManager(), ScoreInsertDialogFragment.TAG);
         //.getDialog().setOnDismissListener(this).show(getSupportFragmentManager(), "");
 
     }
@@ -152,5 +157,36 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     @Override
     public void onDismiss(DialogInterface dialog) {
         reset();
+    }
+
+
+    private void getCurrentHighScore() {
+        ScoreDBHelper scoreDBHelper = new ScoreDBHelper(this);
+        SQLiteDatabase sqLiteDatabase = scoreDBHelper.getReadableDatabase();
+        String[] projection = {
+                ScoreContract.Score.COLUMN_NAME_NAME,
+                ScoreContract.Score.COLUMN_NAME_SCORE
+        };
+
+        //String selection = "ORDER BY " + ScoreContract.Score.COLUMN_NAME_SCORE;
+        String sortOrder = ScoreContract.Score.COLUMN_NAME_SCORE + " DESC  LIMIT 1";
+        Cursor cursor = sqLiteDatabase.query(ScoreContract.Score.TABLE_NAME, projection,                               // The columns to return
+                null,
+                null,
+                null,
+                null,
+                sortOrder);
+
+        int currentHighScore = 0;
+        while (cursor.moveToNext()) {
+            currentHighScore = cursor.getInt(
+                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_SCORE));
+
+            Log.e(TAG, "calculateCurrentHighScore: HighScore " + currentHighScore);
+        }
+        cursor.close();
+        if (mCurrentScore > currentHighScore) {
+            launchSaveScoreScreen();
+        }
     }
 }

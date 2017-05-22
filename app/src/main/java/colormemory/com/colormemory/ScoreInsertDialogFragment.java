@@ -1,5 +1,6 @@
 package colormemory.com.colormemory;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -85,7 +86,7 @@ public class ScoreInsertDialogFragment extends DialogFragment {
         values.put(ScoreContract.Score.COLUMN_NAME_SCORE, mBinding.tvScore.getText().toString());
 // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ScoreContract.Score.TABLE_NAME, null, values);
-        Log.d(TAG, "insertData() called" + newRowId);
+        Log.e(TAG, "insertData() called" + newRowId);
         dismiss();
     }
 
@@ -93,5 +94,15 @@ public class ScoreInsertDialogFragment extends DialogFragment {
         Dialog dialog = super.onCreateDialog(bundle);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return dialog;
+    }
+
+
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+        super.onDismiss(dialog);
+        final Activity activity = getActivity();
+        if (activity instanceof DialogInterface.OnDismissListener) {
+            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
+        }
     }
 }
