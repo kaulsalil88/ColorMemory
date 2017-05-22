@@ -9,11 +9,13 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.Toast;
 
 import colormemory.com.colormemory.databinding.FragmentScoreUpdateBinding;
 import db.ScoreContract;
@@ -62,12 +64,18 @@ public class ScoreInsertDialogFragment extends DialogFragment {
 
 
     @Override
-    public void onViewCreated(View view, Bundle bundle) {
+    public void onViewCreated(final View view, Bundle bundle) {
         //ScoreDBHelper scoreDBHelper = new ScoreDBHelper(view.getContext());
         mBinding.btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertData();
+                if (TextUtils.isEmpty(mBinding.etName.getText().toString())) {
+                    insertData();
+                } else {
+                    Toast.makeText(view.getContext(), getString(R.string.namecantbeempty), Toast.LENGTH_SHORT).show();
+                }
+
+
             }
         });
         mBinding.tvScore.setText(String.valueOf(mScore));
