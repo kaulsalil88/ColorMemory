@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -160,31 +161,44 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
 
     private void getCurrentHighScore() {
-        ScoreDBHelper scoreDBHelper = new ScoreDBHelper(this);
-        SQLiteDatabase sqLiteDatabase = scoreDBHelper.getReadableDatabase();
-        String[] projection = {
-                ScoreContract.Score.COLUMN_NAME_NAME,
-                ScoreContract.Score.COLUMN_NAME_SCORE
-        };
+        AsyncTask asyncTask = new AsyncTask<Void, Void, Integer>() {
 
-        String sortOrder = ScoreContract.Score.COLUMN_NAME_SCORE + " DESC  LIMIT 1";
-        Cursor cursor = sqLiteDatabase.query(ScoreContract.Score.TABLE_NAME, projection,                               // The columns to return
-                null,
-                null,
-                null,
-                null,
-                sortOrder);
+            @Override
+            protected Integer doInBackground(Void... params) {
+                ScoreDBHelper scoreDBHelper = new ScoreDBHelper(MainActivity.this);
+                SQLiteDatabase sqLiteDatabase = scoreDBHelper.getReadableDatabase();
+                String[] projection = {
+                        ScoreContract.Score.COLUMN_NAME_NAME,
+                        ScoreContract.Score.COLUMN_NAME_SCORE
+                };
 
-        int currentHighScore = 0;
-        while (cursor.moveToNext()) {
-            currentHighScore = cursor.getInt(
-                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_SCORE));
+                String sortOrder = ScoreContract.Score.COLUMN_NAME_SCORE + " DESC  LIMIT 1";
+                Cursor cursor = sqLiteDatabase.query(ScoreContract.Score.TABLE_NAME, projection,                               // The columns to return
+                        null,
+                        null,
+                        null,
+                        null,
+                        sortOrder);
 
-            Log.e(TAG, "calculateCurrentHighScore: HighScore " + currentHighScore);
-        }
-        cursor.close();
-        if (mCurrentScore > currentHighScore) {
-            launchSaveScoreScreen();
-        }
+                int currentHighScore = 0;
+                while (cursor.moveToNext()) {
+                    currentHighScore = cursor.getInt(
+                            cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_SCORE));
+
+                    Log.e(TAG, "calculateCurrentHighScore: HighScore " + currentHighScore);
+                }
+                cursor.close();
+                return currentHighScore;
+            }
+
+            @Override
+            public void onPostExecute(Integer integer) {
+                if (mCurrentScore > integer) {
+                    launchSaveScoreScreen();
+                }
+            }
+        }.execute();
+
+
     }
 }
