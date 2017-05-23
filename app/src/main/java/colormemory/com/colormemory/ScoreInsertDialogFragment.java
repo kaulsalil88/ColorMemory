@@ -30,7 +30,7 @@ import model.ScoreRowModel;
  * Created by salil-kaul on 20/5/17.
  */
 
-public class ScoreInsertDialogFragment extends DialogFragment {
+public class ScoreInsertDialogFragment extends DialogFragment implements OnScoresLoaded {
 
 
     public static final String TAG = ScoreInsertDialogFragment.class.getSimpleName();
@@ -121,32 +121,16 @@ public class ScoreInsertDialogFragment extends DialogFragment {
 
 
     private void getRank() {
-        ScoreDBHelper scoreDBHelper = new ScoreDBHelper(getContext());
-        SQLiteDatabase sqLiteDatabase = scoreDBHelper.getReadableDatabase();
-        String[] projection = {
-                ScoreContract.Score.COLUMN_NAME_NAME,
-                ScoreContract.Score.COLUMN_NAME_SCORE
-        };
+        SelectTopScoreAsyncTask scoreAsyncTask = new SelectTopScoreAsyncTask(getActivity());
+        scoreAsyncTask.setmOnScoresLoaded(this);
+        scoreAsyncTask.execute();
 
-        //String selection = "ORDER BY " + ScoreContract.Score.COLUMN_NAME_SCORE;
-        String sortOrder = ScoreContract.Score.COLUMN_NAME_SCORE + " DESC  ";
-        Cursor cursor = sqLiteDatabase.query(ScoreContract.Score.TABLE_NAME, projection,                               // The columns to return
-                null,
-                null,
-                null,
-                null,
-                sortOrder);
-        int count = 0;
-        while (cursor.moveToNext()) {
-            count++;
-            ScoreRowModel scoreRowModel = new ScoreRowModel(count, cursor.getInt(
-                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_SCORE)), cursor.getString(
-                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_NAME)));
-            scores.add(scoreRowModel);
-        }
-        cursor.close();
+
+    }
+
+    @Override
+    public void onScoresLoaded(List<ScoreRowModel> scores) {
         ScoreRowModel scoreRowModel = null;
-
         for (ScoreRowModel scoreRowModel1 : scores) {
             if (scoreRowModel1.getScore() == mScore) {
                 scoreRowModel = scoreRowModel1;
