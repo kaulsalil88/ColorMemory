@@ -73,7 +73,7 @@ public class ScoreInsertDialogFragment extends DialogFragment {
         mBinding.btSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (TextUtils.isEmpty(mBinding.etName.getText().toString())) {
+                if (!TextUtils.isEmpty(mBinding.etName.getText().toString())) {
                     insertData();
                 } else {
                     Toast.makeText(view.getContext(), getString(R.string.namecantbeempty), Toast.LENGTH_SHORT).show();

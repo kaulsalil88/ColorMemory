@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     }
 
 
-    private void reset() {
+    public void reset() {
         mCurrentScore = 0;
         mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
         for (int i = 0; i < 4; i++) {
@@ -184,9 +184,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
             Log.e(TAG, "calculateCurrentHighScore: HighScore " + currentHighScore);
         }
         cursor.close();
-//        if (mCurrentScore > currentHighScore) {
-//            launchSaveScoreScreen();
-//        }
-        launchSaveScoreScreen();
+        if (mCurrentScore > currentHighScore) {
+            launchSaveScoreScreen();
+        }
     }
 }
