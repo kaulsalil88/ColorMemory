@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -17,11 +18,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import colormemory.com.colormemory.databinding.FragmentScoreUpdateBinding;
 import db.ScoreContract;
 import db.ScoreDBHelper;
-
-import static android.content.ContentValues.TAG;
+import model.ScoreRowModel;
 
 /**
  * Created by salil-kaul on 20/5/17.
@@ -33,6 +36,7 @@ public class ScoreInsertDialogFragment extends DialogFragment {
     public static final String TAG = ScoreInsertDialogFragment.class.getSimpleName();
     FragmentScoreUpdateBinding mBinding;
     private int mScore;
+    private List<ScoreRowModel> scores = new ArrayList<>();
 
     public ScoreInsertDialogFragment() {
     }
@@ -95,6 +99,7 @@ public class ScoreInsertDialogFragment extends DialogFragment {
 // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ScoreContract.Score.TABLE_NAME, null, values);
         Log.e(TAG, "insertData() called" + newRowId);
+        getRank();
         dismiss();
     }
 
@@ -112,5 +117,43 @@ public class ScoreInsertDialogFragment extends DialogFragment {
         if (activity instanceof DialogInterface.OnDismissListener) {
             ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
         }
+    }
+
+
+    private void getRank() {
+        ScoreDBHelper scoreDBHelper = new ScoreDBHelper(getContext());
+        SQLiteDatabase sqLiteDatabase = scoreDBHelper.getReadableDatabase();
+        String[] projection = {
+                ScoreContract.Score.COLUMN_NAME_NAME,
+                ScoreContract.Score.COLUMN_NAME_SCORE
+        };
+
+        //String selection = "ORDER BY " + ScoreContract.Score.COLUMN_NAME_SCORE;
+        String sortOrder = ScoreContract.Score.COLUMN_NAME_SCORE + " DESC  ";
+        Cursor cursor = sqLiteDatabase.query(ScoreContract.Score.TABLE_NAME, projection,                               // The columns to return
+                null,
+                null,
+                null,
+                null,
+                sortOrder);
+        int count = 0;
+        while (cursor.moveToNext()) {
+            count++;
+            ScoreRowModel scoreRowModel = new ScoreRowModel(count, cursor.getInt(
+                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_SCORE)), cursor.getString(
+                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_NAME)));
+            scores.add(scoreRowModel);
+        }
+        cursor.close();
+        ScoreRowModel scoreRowModel = null;
+
+        for (ScoreRowModel scoreRowModel1 : scores) {
+            if (scoreRowModel1.getScore() == mScore) {
+                scoreRowModel = scoreRowModel1;
+                break;
+            }
+        }
+
+        Toast.makeText(this.getContext(), getString(R.string.yourscoreis, scoreRowModel.getIndexOne()), Toast.LENGTH_SHORT).show();
     }
 }

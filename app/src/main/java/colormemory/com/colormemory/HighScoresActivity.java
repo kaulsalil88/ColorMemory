@@ -28,6 +28,7 @@ public class HighScoresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_high_scores);
+        mBinding.toolbar.setTitle(getString(R.string.highscores));
         getCurrentHighScore();
     }
 

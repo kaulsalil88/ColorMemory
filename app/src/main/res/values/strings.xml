@@ -11,4 +11,5 @@
     <string name="save">save</string>
     <string name="highscores">High Scores</string>
     <string name="namecantbeempty">Name cant be empty</string>
+    <string name="yourscoreis">Your rank is %d</string>
 </resources>

@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
                 final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
                 if (cardModel1.getId() == cardModel2.getId()) {
+
+                }
+
+                if (cardModel1.getId() == cardModel2.getId()) {
                     mIsMatched = true;
                     mSelectedPairs++;
                     cardModel1.setRevealed(true);
@@ -99,14 +103,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                             mPreviousSelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
                             mCurrentlySelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
                             mCurrentlySelectedCard = mPreviousSelectedCard = null;
-                            mBinding.getRoot().setEnabled(false);
                         }
                     }, 1000);
-
-                    //Disabling the parent layout for the duration till the cards arent reset this to prevent the
-                    //mPreviousSelectedCard and mCurrentlySelectedCard from getting reset .
-                    mBinding.getRoot().setEnabled(false);
-
                 } else {
                     mCurrentlySelectedCard = mPreviousSelectedCard = null;
                 }
