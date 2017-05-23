@@ -18,7 +18,7 @@ import db.ScoreContract;
 import db.ScoreDBHelper;
 import model.ScoreRowModel;
 
-public class HighScoresActivity extends AppCompatActivity {
+public class HighScoresActivity extends AppCompatActivity implements OnScoresLoaded {
 
     private static final String TAG = HighScoresActivity.class.getSimpleName();
     ActivityHighScoresBinding mBinding;
@@ -34,39 +34,19 @@ public class HighScoresActivity extends AppCompatActivity {
 
 
     private void getCurrentHighScore() {
-        ScoreDBHelper scoreDBHelper = new ScoreDBHelper(this);
-        SQLiteDatabase sqLiteDatabase = scoreDBHelper.getReadableDatabase();
-        String[] projection = {
-                ScoreContract.Score.COLUMN_NAME_NAME,
-                ScoreContract.Score.COLUMN_NAME_SCORE
-        };
+        SelectTopScoreAsyncTask selectTopScoreAsyncTask = new SelectTopScoreAsyncTask(this);
+        selectTopScoreAsyncTask.setmOnScoresLoaded(this);
+        selectTopScoreAsyncTask.execute();
 
-        //String selection = "ORDER BY " + ScoreContract.Score.COLUMN_NAME_SCORE;
-        String sortOrder = ScoreContract.Score.COLUMN_NAME_SCORE + " DESC  ";
-        Cursor cursor = sqLiteDatabase.query(ScoreContract.Score.TABLE_NAME, projection,                               // The columns to return
-                null,
-                null,
-                null,
-                null,
-                sortOrder);
+    }
 
-        int currentHighScore = 0;
-        int count = 0;
-        while (cursor.moveToNext()) {
-            count++;
-            ScoreRowModel scoreRowModel = new ScoreRowModel(count, cursor.getInt(
-                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_SCORE)), cursor.getString(
-                    cursor.getColumnIndexOrThrow(ScoreContract.Score.COLUMN_NAME_NAME)));
-            scores.add(scoreRowModel);
-        }
-        cursor.close();
 
+    @Override
+    public void onScoresLoaded(List<ScoreRowModel> scores) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mBinding.rvHighScore.setLayoutManager(linearLayoutManager);
         ScoreRowAdapter scoreRowAdapter = new ScoreRowAdapter(scores);
 
         mBinding.rvHighScore.setAdapter(scoreRowAdapter);
     }
-
-
 }

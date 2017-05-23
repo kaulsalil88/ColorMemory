@@ -167,7 +167,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 ScoreContract.Score.COLUMN_NAME_SCORE
         };
 
-        //String selection = "ORDER BY " + ScoreContract.Score.COLUMN_NAME_SCORE;
         String sortOrder = ScoreContract.Score.COLUMN_NAME_SCORE + " DESC  LIMIT 1";
         Cursor cursor = sqLiteDatabase.query(ScoreContract.Score.TABLE_NAME, projection,                               // The columns to return
                 null,
