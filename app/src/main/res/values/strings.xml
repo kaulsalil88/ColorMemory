@@ -16,4 +16,6 @@
     <string name="rank">Rank</string>
     <string name="name">Name</string>
     <string name="score">Score</string>
+    <string name="pleasewait">Please Wait</string>
+    <string name="currentscore">Current Score</string>
 </resources>

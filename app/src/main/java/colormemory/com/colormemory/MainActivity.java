@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     private ImageView mPreviousSelectedCard, mCurrentlySelectedCard;
 
     private Handler mHandler;
-    private boolean mIsMatched = false;
     int mSelectedPairs = 0;
 
     @Override
@@ -69,52 +68,55 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
 
     public void onClick(final View view) {
-        final CardModel cardModel = ((CardModel) view.getTag());
-        if (!cardModel.isRevealed()) {
-            ((ImageView) view).setBackgroundDrawable(cardModel.getDrawable());
-            if (mPreviousSelectedCard == null) {
-                mPreviousSelectedCard = ((ImageView) view);
-                return;
-            } else {
-                mCurrentlySelectedCard = ((ImageView) view);
-                final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
-                final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
-                if (cardModel1.getId() == cardModel2.getId()) {
-                    mIsMatched = true;
-                    mSelectedPairs++;
-                    cardModel1.setRevealed(true);
-                    cardModel2.setRevealed(true);
-                    mCurrentScore = mCurrentScore + 2;
-                    //All the cards have been revealed .
-                    if (mSelectedPairs == 8) {
-                        Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
-                        getCurrentHighScore();
-                    }
+
+        if (mCurrentlySelectedCard == null || (mCurrentlySelectedCard != null && mPreviousSelectedCard == null)) {
+            final CardModel cardModel = ((CardModel) view.getTag());
+            if (!cardModel.isRevealed()) {
+                ((ImageView) view).setBackgroundDrawable(cardModel.getDrawable());
+                if (mPreviousSelectedCard == null) {
+                    mPreviousSelectedCard = ((ImageView) view);
+                    return;
                 } else {
-                    mIsMatched = false;
-                    mCurrentScore = mCurrentScore - 1;
-                }
-                if (!mIsMatched) {
+                    mCurrentlySelectedCard = ((ImageView) view);
+                    final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
+                    final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
+                    //Scoring will happen after a delay of 1 second .
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mPreviousSelectedCard.setBackgroundDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
-                            mCurrentlySelectedCard.setBackgroundDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
-                            mCurrentlySelectedCard = mPreviousSelectedCard = null;
+                            if (cardModel1.getId() == cardModel2.getId()) {
+                                mSelectedPairs++;
+                                cardModel1.setRevealed(true);
+                                cardModel2.setRevealed(true);
+                                mCurrentScore = mCurrentScore + 2;
+                                mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
+                                mCurrentlySelectedCard = mPreviousSelectedCard = null;
+                                //All the cards have been revealed .
+                                if (mSelectedPairs == 8) {
+                                    Toast.makeText(view.getContext(), getString(R.string.congratsnewhighscore), Toast.LENGTH_SHORT).show();
+                                    getCurrentHighScore();
+                                }
+                            } else {
+                                mCurrentScore = mCurrentScore - 1;
+                                mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
+                                mPreviousSelectedCard.setBackgroundDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
+                                mCurrentlySelectedCard.setBackgroundDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
+                                mCurrentlySelectedCard = mPreviousSelectedCard = null;
+                            }
                         }
                     }, 1000);
-                } else {
-                    mCurrentlySelectedCard = mPreviousSelectedCard = null;
+
+
                 }
 
-
+            } else {
+                Toast.makeText(view.getContext(), getString(R.string.alreadymatched), Toast.LENGTH_SHORT).show();
             }
 
         } else {
-            Toast.makeText(view.getContext(), getString(R.string.alreadymatched), Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(), getString(R.string.pleasewait), Toast.LENGTH_SHORT).show();
         }
 
-        mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
 
     }
 
