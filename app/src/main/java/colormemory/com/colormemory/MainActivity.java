@@ -80,10 +80,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 final CardModel cardModel1 = (CardModel) mPreviousSelectedCard.getTag();
                 final CardModel cardModel2 = (CardModel) mCurrentlySelectedCard.getTag();
                 if (cardModel1.getId() == cardModel2.getId()) {
-
-                }
-
-                if (cardModel1.getId() == cardModel2.getId()) {
                     mIsMatched = true;
                     mSelectedPairs++;
                     cardModel1.setRevealed(true);
@@ -141,7 +137,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     public void reset() {
         mCurrentScore = 0;
-        mSelectedPairs=0;
+        mSelectedPairs = 0;
+        mCurrentlySelectedCard = mPreviousSelectedCard = null;
         mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -161,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
 
     private void getCurrentHighScore() {
-        AsyncTask asyncTask = new AsyncTask<Void, Void, Integer>() {
+        new AsyncTask<Void, Void, Integer>() {
 
             @Override
             protected Integer doInBackground(Void... params) {
@@ -193,6 +190,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
             @Override
             public void onPostExecute(Integer integer) {
+                //Saving the data in the table if the value is greater
+                //than the highest value stored in the table
                 if (mCurrentScore > integer) {
                     launchSaveScoreScreen();
                 }
