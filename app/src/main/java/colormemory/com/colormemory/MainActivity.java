@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     public void reset() {
         mCurrentScore = 0;
+        mSelectedPairs=0;
         mBinding.tvCurrentscore.setText(String.valueOf(mCurrentScore));
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
