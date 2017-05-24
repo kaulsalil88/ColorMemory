@@ -36,7 +36,6 @@ public class ScoreInsertDialogFragment extends DialogFragment implements OnScore
     public static final String TAG = ScoreInsertDialogFragment.class.getSimpleName();
     FragmentScoreUpdateBinding mBinding;
     private int mScore;
-    private List<ScoreRowModel> scores = new ArrayList<>();
 
     public ScoreInsertDialogFragment() {
     }

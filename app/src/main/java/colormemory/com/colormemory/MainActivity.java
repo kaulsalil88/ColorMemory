@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     public void onClick(final View view) {
         final CardModel cardModel = ((CardModel) view.getTag());
         if (!cardModel.isRevealed()) {
-            ((ImageView) view).setBackground(cardModel.getDrawable());
+            ((ImageView) view).setBackgroundDrawable(cardModel.getDrawable());
             if (mPreviousSelectedCard == null) {
                 mPreviousSelectedCard = ((ImageView) view);
                 return;
@@ -101,8 +102,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mPreviousSelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
-                            mCurrentlySelectedCard.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
+                            mPreviousSelectedCard.setBackgroundDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
+                            mCurrentlySelectedCard.setBackgroundDrawable(ContextCompat.getDrawable(view.getContext(), R.drawable.card_bg));
                             mCurrentlySelectedCard = mPreviousSelectedCard = null;
                         }
                     }, 1000);
@@ -133,9 +134,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     private void launchSaveScoreScreen() {
         ScoreInsertDialogFragment scoreInsertDialogFragment = ScoreInsertDialogFragment.newInstance(mCurrentScore);
-//        scoreInsertDialogFragment.getDialog().setOnDismissListener(this);
         scoreInsertDialogFragment.show(getSupportFragmentManager(), ScoreInsertDialogFragment.TAG);
-        //.getDialog().setOnDismissListener(this).show(getSupportFragmentManager(), "");
 
     }
 
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
             for (int j = 0; j < 4; j++) {
                 int imageViewIdentifier = getResources().getIdentifier("iv_" + i + "" + j, "id", getPackageName());
                 ImageView imageView = ((ImageView) findViewById(imageViewIdentifier));
-                imageView.setBackground(ContextCompat.getDrawable(this, R.drawable.card_bg));
+                imageView.setBackgroundDrawable(ContextCompat.getDrawable(this, R.drawable.card_bg));
                 CardModel cardModel = ((CardModel) imageView.getTag());
                 cardModel.setRevealed(false);
             }
@@ -201,4 +200,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
 
     }
+
+
 }
